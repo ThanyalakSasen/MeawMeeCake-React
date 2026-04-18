@@ -113,6 +113,137 @@ Removed LoginPage.css and Dashboard.css dependencies entirely.
       Fixed: moved accessValid/refreshValid into state (updated each second)
       to avoid impure Date.now() calls during render.
 
+--------------------------------------------------------------------------------
+[USER]
+change color template of bootstrap to earth tone
+--------------------------------------------------------------------------------
+[ASSISTANT]
+Installed sass and created a custom Bootstrap SCSS theme with earth tones.
+
+  NEW FILE:
+  - src/styles/bootstrap-earth.scss
+      Overrides Bootstrap 5 SCSS variables before importing Bootstrap:
+        $primary   #8B5E3C  warm chestnut brown
+        $secondary #9E8C7A  dusty taupe
+        $success   #6B7C45  olive green
+        $info      #6A8E8A  sage teal
+        $warning   #C9A03E  golden amber
+        $danger    #B85C38  burnt sienna
+        $light     #F5EFE6  linen cream
+        $dark      #3C2B1F  dark espresso
+        $body-bg   #2E2018  deep warm brown
+        $body-color #F0E4D0 warm off-white
+      Also overrides card, input, navbar, table, link, border variables.
+      Adds custom .table-dark, .table-secondary, .bg-dark, scrollbar styles.
+
+  UPDATED FILES:
+  - src/main.tsx
+      Replaced 'bootstrap/dist/css/bootstrap.min.css'
+      with     './styles/bootstrap-earth.scss'
+
+  - src/pages/Dashboard.tsx
+      Replaced hard-coded purple inline style on REFRESH TOKEN badge
+      with Bootstrap class bg-info (now sage teal)
+
+--------------------------------------------------------------------------------
+[USER]
+make color template more brightness and friendly with bakery website
+--------------------------------------------------------------------------------
+[ASSISTANT]
+Replaced the dark earth-tone theme with a bright, warm bakery-friendly palette.
+
+  UPDATED FILES:
+  - src/styles/bootstrap-earth.scss  (renamed theme to "Bakery Sunshine")
+      $primary   #D4621A  cinnamon orange
+      $secondary #A07850  caramel tan
+      $success   #5A9E52  fresh herb green
+      $info      #4A90A4  sky blue glaze
+      $warning   #F5C842  honey yellow
+      $danger    #D94F38  strawberry red
+      $light     #FFF8F0  warm white cream
+      $dark      #3E2A14  rich cocoa
+      $body-bg   #FFF3E0  soft peach cream (linear-gradient on body)
+      $body-color #3E2A14 cocoa text (dark on light)
+      Navbar: white background with orange brand, soft shadow
+      Cards: white, rounded 1rem, warm shadow
+      Tables: light cream rows instead of dark
+      Inputs: white background, orange focus ring
+      code elements: orange tint highlight
+
+  - src/pages/Dashboard.tsx
+      Removed bg-dark/text-light from page wrapper
+      Heading color set to cocoa #3E2A14
+
+--------------------------------------------------------------------------------
+[USER]
+have more idea from color template, i don't like current template
+--------------------------------------------------------------------------------
+[ASSISTANT]
+Offered 5 theme options. User chose "Honey & Vanilla".
+Rewrote src/styles/bootstrap-earth.scss as a clean single-theme file.
+
+  THEME: Honey & Vanilla — cozy artisan bakery
+  PALETTE:
+    $primary   #C8832A  golden honey
+    $secondary #C49A8A  dusty rose mauve
+    $success   #7A9E6A  sage herb green
+    $info      #7DAFC2  soft cornflower blue
+    $warning   #F0C040  warm sunflower
+    $danger    #C75B5B  berry red
+    $light     #FFFDF7  pure vanilla white
+    $dark      #3D2B1A  dark walnut
+    body-bg    #FDFAF3  warm ivory + subtle radial gradients
+
+  KEY STYLES:
+    Body:    warm ivory with soft honey + rose radial gradients
+    Navbar:  vanilla white, honey brand text, warm bottom border
+    Cards:   white, 1.1rem radius, warm honey shadow, lift on hover
+    Tables:  light cream rows (not dark), warm honey hover
+    Inputs:  vanilla bg, honey focus ring
+    Button:  honey gradient with shadow
+    Alert:   soft pink-red on light (not harsh)
+    Code:    honey-tinted highlight
+
+--------------------------------------------------------------------------------
+[USER]
+i want to try all template that u offer, create dropdown that can select template
+and change it currently both on login and dashboard page
+--------------------------------------------------------------------------------
+[ASSISTANT]
+Implemented a full runtime theme switcher. All 5 themes are switchable instantly
+without a page reload. Selection is saved in localStorage.
+
+  NEW FILES:
+  - src/context/ThemeContext.tsx
+      ThemeProvider: sets data-theme on <html>, persists to localStorage
+      THEMES array: all 5 theme definitions (id, label, emoji, description)
+      useTheme() hook
+
+  - src/components/ThemeSwitcher.tsx
+      Bootstrap-styled dropdown (React-controlled, no Bootstrap JS needed)
+      Shows emoji + name on md+ screens, emoji only on mobile
+      Each option shows emoji, name, and description
+      Active item highlighted
+
+  - src/styles/bootstrap-earth.scss (rewritten)
+      Single @import "bootstrap/scss/bootstrap" with Honey & Vanilla as compiled base
+      All 5 themes defined as CSS custom property blocks on [data-theme="..."]
+        Updates --bs-primary-rgb, --bs-secondary-rgb, --bs-*-rgb etc.
+        → Bootstrap utilities (bg-primary, text-primary, badge bg-*) update automatically
+      Custom --t-* vars for gradients, shadows, table colors, button gradients
+
+  UPDATED FILES:
+  - src/App.tsx: wrapped with <ThemeProvider> (outermost)
+  - src/pages/Dashboard.tsx: ThemeSwitcher added to navbar (leftmost item)
+  - src/pages/LoginPage.tsx: ThemeSwitcher added top-right of card
+
+  THEMES AVAILABLE:
+    🍯 Honey & Vanilla    warm ivory, gold & dusty rose
+    🌸 Pastel Patisserie  soft pink, lavender & mint
+    🌿 Matcha Garden      sage green, cream & warm blush
+    🍓 Berry Jam          berry purple, strawberry & cream
+    ☕ Café au Lait        latte brown, caramel & dusty peach
+
 ================================================================================
   END OF SESSION LOG
 ================================================================================

@@ -1,0 +1,171 @@
+﻿// ============================================================
+//  Bakery Theme Engine
+//  Base compiled with Honey & Vanilla; all 5 themes are
+//  runtime-switchable via CSS custom properties on <html>.
+// ============================================================
+
+// ── Bootstrap SCSS compile-time vars (Honey & Vanilla base) ─
+$primary:                  #C8832A;
+$secondary:                #C49A8A;
+$success:                  #7A9E6A;
+$info:                     #7DAFC2;
+$warning:                  #F0C040;
+$danger:                   #C75B5B;
+$light:                    #FFFDF7;
+$dark:                     #3D2B1A;
+$body-bg:                  #FDFAF3;
+$body-color:               #3D2B1A;
+$body-secondary-color:     rgba(61, 43, 26, 0.70);
+$card-bg:                  #FFFFFF;
+$card-border-color:        #EDE0CC;
+$card-color:               #3D2B1A;
+$input-bg:                 #FFFDF7;
+$input-border-color:       #DEC9A8;
+$input-color:              #3D2B1A;
+$input-placeholder-color:  #B09878;
+$input-focus-bg:           #FFFDF7;
+$input-focus-border-color: #C8832A;
+$input-focus-color:        #3D2B1A;
+$table-color:              #3D2B1A;
+$table-bg:                 transparent;
+$table-border-color:       #EDE0CC;
+$table-striped-bg:         rgba(#C8832A, 0.05);
+$table-hover-bg:           rgba(#C8832A, 0.09);
+$alert-bg-scale:           -82%;
+$alert-border-scale:       -62%;
+$alert-color-scale:         30%;
+$badge-font-size:          0.75em;
+$link-color:               #C8832A;
+$link-hover-color:         #9A6010;
+$border-color:             #EDE0CC;
+$border-radius:            0.65rem;
+$border-radius-lg:         0.9rem;
+$border-radius-sm:         0.4rem;
+$box-shadow:    0 2px 14px rgba(#C8832A, 0.09);
+$box-shadow-sm: 0 1px 6px  rgba(#C8832A, 0.07);
+$box-shadow-lg: 0 6px 30px rgba(#C8832A, 0.13);
+
+// ── Import Bootstrap ─────────────────────────────────────────
+@import "bootstrap/scss/bootstrap";
+
+// ── Honey & Vanilla ───────────────────────────────────────────
+:root {
+  --bs-primary:         #C8832A; --bs-primary-rgb:    200, 131,  42;
+  --bs-secondary:       #C49A8A; --bs-secondary-rgb:  196, 154, 138;
+  --bs-success:         #7A9E6A; --bs-success-rgb:    122, 158, 106;
+  --bs-info:            #7DAFC2; --bs-info-rgb:       125, 175, 194;
+  --bs-warning:         #F0C040; --bs-warning-rgb:    240, 192,  64;
+  --bs-danger:          #C75B5B; --bs-danger-rgb:     199,  91,  91;
+  --bs-body-bg:         #FDFAF3; --bs-body-color:     #3D2B1A;
+  --bs-secondary-color: rgba(61, 43, 26, .70);
+  --bs-border-color:    #EDE0CC;
+  --bs-link-color:      #C8832A; --bs-link-color-rgb: 200, 131, 42;
+  --t-surface:          #FFFDF7; --t-surface-subtle:  #FDF5EB;
+  --t-shadow:    rgba(200, 131,  42, .10); --t-shadow-md: rgba(200, 131,  42, .16);
+  --t-focus-ring:rgba(200, 131,  42, .22);
+  --t-table-head:#F5EAD8; --t-table-hover: #FDECD4;
+  --t-btn-from:  #D99030; --t-btn-to: #C8832A; --t-btn-hover: #A06018;
+  --t-grad-1:    rgba(240, 192,  64, .12); --t-grad-2: rgba(196, 154, 138, .14);
+  --t-alert-bg:  #FDECEA; --t-alert-bd: #F2C0BC; --t-alert-tx: #9A2020;
+}
+
+// ============================================================
+//  Global component overrides
+// ============================================================
+
+body {
+  background-image:
+    radial-gradient(ellipse at 15% 10%, var(--t-grad-1) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, var(--t-grad-2) 0%, transparent 55%);
+  min-height: 100vh;
+}
+
+// Navbar
+.navbar {
+  background-color: var(--t-surface) !important;
+  border-bottom: 2px solid var(--bs-border-color) !important;
+  box-shadow: 0 2px 12px var(--t-shadow);
+  .navbar-brand { color: var(--bs-primary) !important; font-size: 1.35rem; font-weight: 800; }
+  .btn-outline-danger {
+    border-color: var(--bs-danger) !important;
+    color: var(--bs-danger) !important;
+    border-radius: 2rem; font-weight: 600;
+    &:hover { background-color: var(--bs-danger) !important; color: #fff !important; }
+  }
+}
+
+// Page wrapper
+.min-vh-100 { background: transparent !important; }
+.bg-dark    { background-color: var(--bs-dark, #3D2B1A) !important; }
+
+// Cards
+.card {
+  background: var(--t-surface) !important;
+  border: 1px solid var(--bs-border-color) !important;
+  border-radius: 1.1rem !important;
+  box-shadow: 0 3px 16px var(--t-shadow);
+  transition: box-shadow .2s ease, transform .2s ease;
+  &:hover { box-shadow: 0 6px 28px var(--t-shadow-md); transform: translateY(-2px); }
+}
+.bg-secondary-subtle { background-color: var(--t-surface-subtle) !important; }
+
+// Form controls
+.form-control {
+  background-color: var(--t-surface) !important;
+  border-color: var(--bs-border-color) !important;
+  color: var(--bs-body-color) !important;
+  border-radius: 0.65rem;
+  &::placeholder { opacity: .5; }
+  &:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 .22rem var(--t-focus-ring) !important;
+  }
+}
+.form-label { font-weight: 600; font-size: .875rem; color: var(--bs-body-color); }
+
+// Primary button
+.btn-primary {
+  background: linear-gradient(135deg, var(--t-btn-from), var(--t-btn-to)) !important;
+  border: none !important;
+  border-radius: .65rem;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(var(--bs-primary-rgb), .28) !important;
+  &:hover  { background: linear-gradient(135deg, var(--t-btn-to), var(--t-btn-hover)) !important; }
+  &:active { background: var(--t-btn-hover) !important; }
+}
+
+// Tables
+.table-secondary {
+  --bs-table-color:        var(--bs-body-color);
+  --bs-table-bg:           var(--t-table-head);
+  --bs-table-border-color: var(--bs-border-color);
+}
+.table-dark {
+  --bs-table-color:        var(--bs-body-color);
+  --bs-table-bg:           var(--t-surface);
+  --bs-table-border-color: var(--bs-border-color);
+  --bs-table-hover-bg:     var(--t-table-hover);
+}
+
+// Alerts
+.alert-danger {
+  background-color: var(--t-alert-bg) !important;
+  border-color:     var(--t-alert-bd) !important;
+  color:            var(--t-alert-tx) !important;
+  border-radius: .65rem;
+}
+
+// Code
+code {
+  color: var(--bs-primary);
+  background: rgba(var(--bs-primary-rgb), .09);
+  padding: .1em .38em;
+  border-radius: .3rem;
+  font-size: .875em;
+}
+
+// Scrollbar
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--bs-body-bg); }
+::-webkit-scrollbar-thumb  { background: var(--bs-border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bs-primary); }

@@ -55,7 +55,7 @@ export default function Dashboard() {
   const refreshValid = tokenInfo?.refreshValid ?? false
 
   return (
-    <div className="min-vh-100 bg-dark text-light">
+    <div className="min-vh-100">
       <nav className="navbar navbar-dark bg-black border-bottom border-secondary px-4">
         <span className="navbar-brand fw-bold text-primary">MeawMeeCake</span>
         <div className="d-flex align-items-center gap-2">
@@ -158,7 +158,7 @@ export default function Dashboard() {
                 <div className="card bg-secondary-subtle border-secondary h-100">
                   <div className="card-body">
                     <div className="d-flex align-items-center justify-content-between mb-3">
-                      <span className="badge" style={{ background: '#7c3aed' }}>REFRESH TOKEN</span>
+                      <span className="badge bg-info">REFRESH TOKEN</span>
                       <span className={`badge ${refreshValid ? 'bg-success' : 'bg-danger'}`}>
                         {refreshValid ? 'Valid' : 'Expired'}
                       </span>
