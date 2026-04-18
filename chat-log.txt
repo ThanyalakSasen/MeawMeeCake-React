@@ -89,6 +89,30 @@ Created a full JWT-style mock token system (client-side demo only):
         ACCESS TOKEN card  — subject, role, expiry, live time-left counter
         REFRESH TOKEN card — storage, expiry date, auto-refresh info
 
+--------------------------------------------------------------------------------
+[USER]
+refactor dashboard and login page to use bootstrap instead
+--------------------------------------------------------------------------------
+[ASSISTANT]
+Installed bootstrap and refactored both pages to use Bootstrap utility classes.
+Removed LoginPage.css and Dashboard.css dependencies entirely.
+
+  UPDATED FILES:
+  - src/main.tsx
+      Added: import 'bootstrap/dist/css/bootstrap.min.css'
+
+  - src/pages/LoginPage.tsx
+      Replaced custom CSS with Bootstrap: min-vh-100, d-flex, card,
+      form-control, btn, alert, table classes.
+      Removed import of LoginPage.css
+
+  - src/pages/Dashboard.tsx
+      Replaced custom CSS with Bootstrap: navbar, container, row/col grid,
+      card, table-dark, table-hover, badge classes.
+      Removed import of Dashboard.css
+      Fixed: moved accessValid/refreshValid into state (updated each second)
+      to avoid impure Date.now() calls during render.
+
 ================================================================================
   END OF SESSION LOG
 ================================================================================
