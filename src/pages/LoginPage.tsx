@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { MOCK_USER_HINTS } from '../utils/mockUsers'
 import './LoginPage.css'
 
 export default function LoginPage() {
@@ -59,7 +60,21 @@ export default function LoginPage() {
           <button type="submit" className="login-btn">Sign in</button>
         </form>
 
-        <p className="login-hint">Demo: <strong>admin</strong> / <strong>password</strong></p>
+        <div className="login-hints">
+          <p className="login-hints-title">Demo accounts</p>
+          <div className="hints-table">
+            <div className="hints-header">
+              <span>Username</span><span>Password</span><span>Role</span>
+            </div>
+            {MOCK_USER_HINTS.map((u) => (
+              <div key={u.username} className="hints-row">
+                <span>{u.username}</span>
+                <span>{u.password}</span>
+                <span className="hints-role">{u.role}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

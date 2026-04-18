@@ -107,3 +107,48 @@
 .login-hint strong {
   color: #a6adc8;
 }
+
+.login-hints {
+  margin-top: 1.5rem;
+}
+
+.login-hints-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6c7086;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0 0 0.5rem;
+}
+
+.hints-table {
+  border: 1px solid #313244;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.8rem;
+}
+
+.hints-header,
+.hints-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  padding: 0.45rem 0.75rem;
+}
+
+.hints-header {
+  background: #11111b;
+  color: #45475a;
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hints-row {
+  border-top: 1px solid #313244;
+  color: #a6adc8;
+}
+
+.hints-role {
+  color: #89b4fa;
+}
